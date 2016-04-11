@@ -1,0 +1,231 @@
+/*------------ some imports happening ------------*/
+@import "_normalize";
+@import "_fonts";
+
+
+/*----------- some general ajustments -------------*/
+html {
+	width:100%;
+	height: 100%;
+	font-size: 100.01%;
+}
+
+body {
+	font: 15px/1.41 'fira_sansmedium';
+    -webkit-font-smoothing: antialiased;
+	width:100%;
+	height: 100%;
+	background: #999999;
+	display: flex;
+	justify-content: center;
+	align-items: top;
+}
+
+*{
+	box-sizing: border-box;
+}
+
+/*------------- variables defenition -----------*/
+$white: #fff;
+$black: #4f4f4f;
+$orange: #ff8663;
+$light-grey: #f0f0f0;
+$dark-grey: #696666;
+$text-color: #5c5c5c;
+
+$review-width: 380px;
+
+
+#map{
+	width: 100%;
+	height: 100%;
+}
+
+/*------------- centering filter --------------*/
+.mr-wrapper{
+	width: $review-width;
+	margin-top: 50px;
+}
+
+/*------------ header section -------------*/
+.review-header{
+	background-color: $orange;
+	height: 45px;
+	border-radius: 10px 10px 0 0;
+}
+
+.header-adress{
+	color: $white;
+	float: left;
+	font-size: 12px;
+	line-height: 45px;
+	padding-left: 10px;
+
+	&:before{
+		padding-right: 10px;
+		content:"\f041";
+		font-family: FontAwesome; 
+	}
+}
+
+.x-wrapper{
+	float: right;
+	margin: 15px 15px 0 0 ;
+}
+
+/*------------ review-body -------------*/
+.review-list-wrapper{
+	width: $review-width;
+	display: block;
+	background-color: $white;
+	max-height: 150px;
+	overflow-y: auto;
+}
+.review-list-wrapper hr {
+	max-width: 90%
+}
+
+.review-list-wrapper::-webkit-scrollbar {
+	border-radius: 10px;
+	width: 8px;
+	background-color: rgba(92, 92, 92, .5);
+	border: none;
+} 
+
+.review-list{
+	padding-left: 20px;
+	margin: 0;
+	background-color: #fff;
+	display: block;
+	color: $text-color;
+	list-style: none;
+}	
+
+.review-list-item{
+	padding-top: 20px;
+}
+
+.reviewer-name{
+
+}
+
+.review-place{
+	font-family: "fira_sanslight";
+}
+
+.review-date{
+	font-family: "fira_sanslight";
+}
+
+.review-text{
+	padding-top: 5px;
+	display: block;
+}
+
+/*-------------- добавление отзыва ---------------*/
+.review-form-wrapper{
+	color: $text-color;
+	background-color: $white;
+	border-radius: 0 0 10px 10px;
+	padding-left: 20px;
+}
+
+.review-add__form{
+	font-family: "fira_sanslight";
+}
+.form-header{
+	padding-left: 10px;
+	color: $orange;
+	text-transform: uppercase;
+	font-family: "fira_sansmedium";
+}
+
+.review-add__input{
+	width: 90%;
+	padding-left: 10px;
+	border-radius: 20px;
+	border: none;
+	font-size: 14px;
+	line-height: 33px;
+	border: 1px solid rgba(92, 92, 92, .3);
+	display: block;
+	margin-bottom: 15px;
+
+	&:focus{
+		box-shadow: inset 2px 2px 5px rgba(92, 92, 92, .3);
+		outline: none;
+		border:1px solid rgba(255, 134, 99, .4);
+	}
+}
+.review-add__textarea{
+	@extend .review-add__input;
+	resize:vertical;
+	line-height: 1.6;
+
+}
+
+.review-add__button{
+	margin: 0 0 10px 240px;
+	box-shadow: none;
+	background-color: $orange;
+	color: $white;
+	border: none;
+	border-radius:10px;
+}
+
+.cross{
+	text-decoration: none;
+	color: $dark-grey;
+	display: inline-block;
+	vertical-align: middle;
+	float: right;
+	padding:0 15px;	
+	font-size:32px;
+	cursor: pointer;
+}
+
+
+
+.cross{
+	text-decoration: none;
+	color: $dark-grey;
+	display: inline-block;
+	vertical-align: middle;
+	float: right;
+	padding:0 15px;	
+	font-size:32px;
+	cursor: pointer;
+
+}
+
+
+.right-col  .cross{
+	padding: 0;
+	margin:  0 15px; 	
+	transform: rotate(45deg);
+}
+
+/*------------ filter-footer -------------*/
+.filter-footer{
+	height: 45px;
+	background-color: $light-grey;
+	border-radius: 0 0 10px 10px;
+}
+
+.save-button{
+	text-decoration: none;
+	color: $white;
+	display: inline-block;
+	padding: 5px 20px;
+	font-family: 'fira_sanslight';
+	background-color: $orange;
+	border-radius: 9px;
+	margin-top: 6px;
+	margin-left: 500px;
+	cursor: pointer;
+
+}
+
+
+
+
