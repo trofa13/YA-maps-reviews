@@ -58,7 +58,7 @@ var assert = require('assert'),
         }).catch(function(e) {
             response.writeHead(403);
             response.write(JSON.stringify({
-                error: {message: 'wrong format'}
+                error: {message: 'Неверный формат'}
             }));
             response.end();
         });
@@ -71,7 +71,7 @@ function parsePost(req) {
         var data = '';
 
         if (req.method.toLowerCase() !== 'post') {
-            throw new Error('Not POST');
+            throw new Error('Не POST');
         }
 
         req.on('data', function(chunk) {

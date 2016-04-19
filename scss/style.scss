@@ -45,6 +45,9 @@ $review-width: 380px;
 .mr-wrapper{
 	width: $review-width;
 	margin-top: 50px;
+	display: none;
+	position: absolute;
+	z-index: 1000;
 }
 
 /*------------ header section -------------*/
@@ -128,6 +131,7 @@ $review-width: 380px;
 	background-color: $white;
 	border-radius: 0 0 10px 10px;
 	padding-left: 20px;
+
 }
 
 .review-add__form{

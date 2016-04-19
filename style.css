@@ -450,6 +450,9 @@ body {
 .mr-wrapper {
   width: 380px;
   margin-top: 50px;
+  display: none;
+  position: absolute;
+  z-index: 1000;
 }
 
 /*------------ header section -------------*/
