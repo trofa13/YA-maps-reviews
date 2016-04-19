@@ -47,7 +47,7 @@ $review-width: 380px;
 	//margin-top: 50px;
 	//display: none;
 	//position: absolute;
-	z-index: 1000;
+	
 }
 
 /*------------ header section -------------*/
@@ -81,7 +81,7 @@ $review-width: 380px;
 	width: $review-width;
 	display: block;
 	background-color: $white;
-	max-height: 150px;
+	max-height: 140px;
 	overflow-y: auto;
 }
 .review-list-wrapper hr {
@@ -106,6 +106,10 @@ $review-width: 380px;
 
 .review-list-item{
 	padding-top: 20px;
+
+	&:first-child{
+		padding-top: 5px;
+	}
 }
 
 .reviewer-name{
@@ -174,6 +178,8 @@ $review-width: 380px;
 	background-color: $orange;
 	color: $white;
 	border: none;
+	text-decoration: none;
+	padding: 5px 15px;
 	border-radius:10px;
 }
 

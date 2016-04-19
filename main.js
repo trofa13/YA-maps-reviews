@@ -5,7 +5,6 @@
 
 
 
-
 /*var response = {
     "op": "add",
     "review": {
@@ -153,9 +152,12 @@ var addRequest = {
 
 
 
-/*
+
 // Добавляем отзыв
-      sendReview.addEventListener('click', function(e){
+  /*document.addEventListener('click', function(e){
+
+    console.log(e.target.id)
+    if(e.target.id == 'sendReview'){
   e.preventDefault();
   // Запишем данные формы в переменные
   var name = newReview.name.value,
@@ -173,7 +175,7 @@ if(name.length === 0 || place.length === 0 || text.length === 0){
 var addRequest = {
     "op": "add",
     "review": {
-        "coords": {"x": coords[0], "y": coords[1]},
+        "coords": {"x": 55.76048396289834, "y": 37.58335174560545},
         "address": "Россия, Москва, Большая Грузинская улица, 8с36",
         "name": name,
         "place": place,
@@ -184,10 +186,10 @@ var addRequest = {
 addRequest = JSON.stringify(addRequest)
     xhr.open('POST', 'http://localhost:3000');
     xhr.send(addRequest)
-
 }
-});
-*/
+}
+});*/
+
 /*------------ ЗАГОТОВКА ДЛЯ ФОРМЫ добавления отзывовов -------------*/
 
 /*var adrRequest = {op: "get", address: "Россия, Москва, Большая Грузинская улица, 8с36"};
@@ -212,20 +214,6 @@ xhr.onload = function (){
   rl.innerHTML = html;
 };*/
 
-
-
-/*    var server = {
-      all: JSON.stringify({op: 'all'}),
-      getAllRevs:  function (){
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST','http://localhost:3000');
-        xhr.onload = function () {
-        var response = xhr.response;
-          console.log(response);
-        };
-        xhr.send(this.all);   
-      }  
-  };*/
 
 
 

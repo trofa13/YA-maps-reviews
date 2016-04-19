@@ -449,7 +449,6 @@ body {
 /*------------- centering filter --------------*/
 .mr-wrapper {
   width: 380px;
-  z-index: 1000;
 }
 
 /*------------ header section -------------*/
@@ -483,7 +482,7 @@ body {
   width: 380px;
   display: block;
   background-color: #fff;
-  max-height: 150px;
+  max-height: 140px;
   overflow-y: auto;
 }
 
@@ -509,6 +508,10 @@ body {
 
 .review-list-item {
   padding-top: 20px;
+}
+
+.review-list-item:first-child {
+  padding-top: 5px;
 }
 
 .review-place {
@@ -572,6 +575,8 @@ body {
   background-color: #ff8663;
   color: #fff;
   border: none;
+  text-decoration: none;
+  padding: 5px 15px;
   border-radius: 10px;
 }
 

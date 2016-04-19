@@ -1,131 +1,272 @@
 ymaps.ready(init);
 
-var myBaloonContent =         "<div class=\"mr-wrapper\">" +
-          "<header class=\"review-header\"><span class=\"header-adress\">Выберите друзей</span>" +
-            "<div class=\"x-wrapper\"><a href=\"#\"><img src=\"img/x.png\" alt=\"review-close\"></a></div>" +
-          "</header>" +
-          "<div class=\"review-list-wrapper\">" +
-            "<ul id=\"rl\" class=\"review-list\">" +
-            "<script id=\"review-list\" type=\"text/x-handlebars-template\">" +
-              "<li class = \"review-list-item\">" +
-                "<strong class=\"reviewer-name\">" +
-               //   "{{name}}" +
-                "</strong>" +
-                "<span class=\"review-place\">" +
-                //  "{{place}}" +
-                "</span>" +
-                "<span class=\"review-date\">" +
-                 // "{{date}}" +
-                "</span>" +
-                "<span class=\"review-text\">" +
-                  //"{{text}}" +
-                "</span></li>" +
-              "</script>" +
-        "</ul><hr></div>";
-
 function init() {
-    var myPlacemark,
-        myMap = new ymaps.Map('map', {
-            center: [55.753994, 37.622093],
-            zoom: 9
-        }, {
-            searchControlProvider: 'yandex#search'
-        });
-    // Создание макета содержимого балуна.
-        // Макет создается с помощью фабрики макетов с помощью текстового шаблона.
-        BalloonContentLayout = ymaps.templateLayoutFactory.createClass(
-        "<div class=\"mr-wrapper\">" +
-          "<header class=\"review-header\"><span class=\"header-adress\">Выберите друзей</span>" +
-            "<div class=\"x-wrapper\"><a href=\"#\"><img src=\"img/x.png\" alt=\"review-close\"></a></div>" +
-          "</header>" +
-          "<div class=\"review-list-wrapper\">" +
-            "<ul id=\"rl\" class=\"review-list\">" +
-            "<script id=\"review-list\" type=\"text/x-handlebars-template\">" +
-              "<li class = \"review-list-item\">" +
-                "<strong class=\"reviewer-name\">" +
-                "{{properties.name}}" +
-                "</strong>" +
-                "<span class=\"review-place\">" +
-                //  "{{place}}" +
-                "</span>" +
-                "<span class=\"review-date\">" +
-                 // "{{date}}" +
-                "</span>" +
-                "<span class=\"review-text\">" +
-                  //"{{text}}" +
-                "</span></li>" +
-              "</script>" +
-        "</ul><hr></div>", {
-
-            // Переопределяем функцию build, чтобы при создании макета начинать
-            // слушать событие click на кнопке-счетчике.
-            build: function () {
-                // Сначала вызываем метод build родительского класса.
-                BalloonContentLayout.superclass.build.call(this);
-                // А затем выполняем дополнительные действия.
-                var closeBaloon = document.getElementById('closeBaloon');
-                function baloonCloser (e){
-                  /*
-                  * TODO - закрытие балуна
-                  */
-                  e.preventDefault();
-                }
-                closeBaloon.addEventListener('click', baloonCloser(e));
-            },
-
-            // Аналогично переопределяем функцию clear, чтобы снять
-            // прослушивание клика при удалении макета с карты.
-            clear: function () {
-                // Выполняем действия в обратном порядке - сначала снимаем слушателя,
-                // а потом вызываем метод clear родительского класса.
-                closeBaloon.removeEventListener('click', baloonCloser(e));
-                BalloonContentLayout.superclass.clear.call(this);
-            },
-
-            onCounterClick: function () {
-/*                $('#count').html(++counter);
-                if (counter == 5) {
-                    alert('Вы славно потрудились.');
-                    counter = 0;
-                    $('#count').html(counter);
-                }*/
-            }
-        });
-
-
-
-    // Слушаем клик на карте
-    myMap.events.add('click', function (e) {
-        var coords = e.get('coords');
-            myPlacemark = new ymaps.Placemark(coords, {
-            name: 'Считаем'
-        }, {
-            balloonContentLayout: BalloonContentLayout,
-            // Запретим замену обычного балуна на балун-панель.
-            // Если не указывать эту опцию, на картах маленького размера откроется балун-панель.
-            balloonPanelMaxMapArea: 0
-        });
-
-            myMap.geoObjects.add(myPlacemark);
-            // Слушаем событие окончания перетаскивания на метке.
-            myPlacemark.events.add('dragend', function () {
-                getAddress(myPlacemark.geometry.getCoordinates());
-            });
-       // getAddress(coords);
+  var myPlacemark,
+    myMap = new ymaps.Map('map', {
+      center: [55.753994, 37.622093],
+      zoom: 9
+    }, {
+      searchControlProvider: 'yandex#search'
     });
 
 
-    // Определяем адрес по координатам (обратное геокодирование)
-    function getAddress(coords) {
-        myPlacemark.properties.set('iconContent', 'поиск...');
-        ymaps.geocode(coords).then(function (res) {
-            var firstGeoObject = res.geoObjects.get(0);
+  // Создание макета содержимого балуна.
+  // Макет создается с помощью фабрики макетов с помощью текстового шаблона.
+  BalloonContentLayout = ymaps.templateLayoutFactory.createClass(
+    '<div class="mr-wrapper">' +
+    '<header class="review-header"><span class="header-adress">{{properties.address}}</span>' +
+    '<div class="x-wrapper"><a id = "closeBalloon"href="#"><img src="img/x.png" alt="review-close"></a></div>' +
+    '</header>' +
+    '<div class="review-list-wrapper">' +
+    '<ul id="rl" class="review-list">' +
+    '</ul><hr></div>' +
+    '<div class="review-form-wrapper">' +
+    '<form name="newReview" class="review-add__form"><span class="form-header">Ваш отзыв</span>' +
+    '<input type="text" name="name" placeholder="Ваше имя" class="review-add__input">' +
+    '<input type="text" name="place" placeholder="Укажите место" class="review-add__input">' +
+    '<textarea type="text" name="text" placeholder="Поделитесь впечатлениями" class="review-add__textarea"></textarea><a id="sendReview" href="#" class="review-add__button">Добавить</a>' +
+    '</form></div></div></div>', {
 
-            myPlacemark.properties
-                .set({
-                    balloonContentLayout: BalloonContentLayout,
-                    balloonContent: firstGeoObject.properties.get('text')
-                });
+      // Переопределяем функцию build, чтобы при создании макета начинать
+      // слушать событие click на кнопке-счетчике.
+      build: function() {
+        // Сначала вызываем метод build родительского класса.
+        BalloonContentLayout.superclass.build.call(this);
+        // А затем выполняем дополнительные действия.
+        var closeBalloon = document.getElementById('closeBalloon');
+
+        function balloonCloser(e) {
+          /*
+           * TODO - закрытие балуна
+           */
+          e.preventDefault();
+        }
+        closeBalloon.addEventListener('click', balloonCloser);
+      },
+
+      // Аналогично переопределяем функцию clear, чтобы снять
+      // прослушивание клика при удалении макета с карты.
+      clear: function() {
+        // Выполняем действия в обратном порядке - сначала снимаем слушателя,
+        // а потом вызываем метод clear родительского класса.
+        //closeBalloon.removeEventListener('click', balloonCloser);
+        BalloonContentLayout.superclass.clear.call(this);
+      },
+
+      onCounterClick: function() {
+        /*                $('#count').html(++counter);
+                        if (counter == 5) {
+                            alert('Вы славно потрудились.');
+                            counter = 0;
+                            $('#count').html(counter);
+                        }*/
+      }
+    });
+
+mapClusterer = new ymaps.Clusterer({ 
+          clusterOpenBalloonOnClick: true,
+          clusterBalloonContentLayout: 'cluster#balloonCarousel',
+          clusterBalloonItemContentLayout: BalloonContentLayout,
+          clusterBalloonPanelMaxMapArea: 0,
+          clusterBalloonContentLayoutWidth: 400,
+          clusterBalloonContentLayoutHeight: 200,
+          clusterBalloonPagerSize: 5
         });
+        
+        //myMap.geoObjects.add(mapClusterer); 
+ // Создаем собственный макет с информацией о выбранном геообъекте.
+    var customItemContentLayout = ymaps.templateLayoutFactory.createClass(
+        // Флаг "raw" означает, что данные вставляют "как есть" без экранирования html.
+        '<h2 class=ballon_header>{{ properties.balloonContentHeader|raw }}</h2>' +
+            '<div class=ballon_body>{{ properties.balloonContentBody|raw }}</div>' +
+            '<div class=ballon_footer>{{ properties.balloonContentFooter|raw }}</div>'
+    );
+
+    var mapClusterer = new ymaps.Clusterer({
+        clusterDisableClickZoom: true,
+        clusterOpenBalloonOnClick: true,
+        // Устанавливаем стандартный макет балуна кластера "Карусель".
+        clusterBalloonContentLayout: 'cluster#balloonCarousel',
+        // Устанавливаем собственный макет.
+        clusterBalloonItemContentLayout: customItemContentLayout,
+        // Устанавливаем режим открытия балуна. 
+        // В данном примере балун никогда не будет открываться в режиме панели.
+        clusterBalloonPanelMaxMapArea: 0,
+        // Устанавливаем размеры макета контента балуна (в пикселях).
+        clusterBalloonContentLayoutWidth: 200,
+        clusterBalloonContentLayoutHeight: 130,
+        // Устанавливаем максимальное количество элементов в нижней панели на одной странице
+        clusterBalloonPagerSize: 5
+        // Настройка внешего вида нижней панели.
+        // Режим marker рекомендуется использовать с небольшим количеством элементов.
+        // clusterBalloonPagerType: 'marker',
+        // Можно отключить зацикливание списка при навигации при помощи боковых стрелок.
+        // clusterBalloonCycling: false,
+        // Можно отключить отображение меню навигации.
+        // clusterBalloonPagerVisible: false
+    });
+    myMap.geoObjects.add(mapClusterer); 
+
+
+  // функиця генрирующая ЛИшку отзыва
+  function generateReviewMarkup(obj) {
+    var li = '<li class = "review-list-item">' +
+      '<strong class="reviewer-name">' +
+      obj.name +
+      ' </strong>' +
+      '<span class="review-place">' +
+      obj.place +
+      ' </span>' +
+      '<span class="review-date">' +
+      new Date(obj.date).toLocaleDateString() +
+      ' </span>' +
+      '<span class="review-text">' +
+      obj.text +
+      '<span></li>';
+    return li;
+  }
+
+  //посылаем запрос на сервер за уже существующими метками
+  var xhr = new XMLHttpRequest();
+  var allRequest = JSON.stringify({
+    op: "all"
+  });
+  xhr.open('POST', 'http://localhost:3000');
+  xhr.responseType = 'json';
+  xhr.send(allRequest);
+  xhr.onloadend = function() {
+    for (var key in xhr.response) {
+      ymaps.geocode(key, {
+        results: 1
+      }).then(function(res) {
+        var firstGeoObject = res.geoObjects.get(0),
+          // Координаты геообъекта.
+          coords = firstGeoObject.geometry.getCoordinates();
+        // Добавляем первый найденный геообъект на карту.
+        myPlacemark = new ymaps.Placemark(coords, {
+          address: firstGeoObject.properties.get('name')
+        }, {
+          balloonContentLayout: BalloonContentLayout,
+          // Запретим замену обычного балуна на балун-панель.
+          // Если не указывать эту опцию, на картах маленького размера откроется балун-панель.
+          balloonPanelMaxMapArea: 0
+        });
+
+       mapClusterer.add(myPlacemark);
+
+        myPlacemark.events.add('click', function() {
+          setTimeout(function() {
+            var reviewList = document.getElementById('rl');
+
+            //отправимся на сервер за запросом отзывов по этому адресу
+
+            var xhr = new XMLHttpRequest();
+            var adrRequest = JSON.stringify({
+              op: "get",
+              address: firstGeoObject.getAddressLine()
+            });
+            xhr.open('POST', "http://localhost:3000");
+            xhr.responseType = 'json';
+            xhr.send(adrRequest);
+            xhr.onloadend = function() {
+
+              for (var i = 0; i < xhr.response.length; i++) {
+                //console.log(xhr.response[i])
+                var li = generateReviewMarkup(xhr.response[i]);
+                reviewList.innerHTML = null;
+                reviewList.innerHTML += li;
+              }
+            };
+          }, 100);
+        });
+      });
+
     }
+  };
+
+  // Слушаем клик на карте
+  myMap.events.add('click', function(e) {
+    var coords = e.get('coords');
+    //определим адрес клика 
+    ymaps.geocode(coords).then(function(res) {
+      return new Promise(function(resolve) {
+        var firstGeoObject = res.geoObjects.get(0);
+        resolve(firstGeoObject);
+      });
+    }).then(function(firstGeoObject) {
+      //создаем метку по определнному адресу
+      myPlacemark = new ymaps.Placemark(coords, {
+        address: firstGeoObject.properties.get('name')
+      }, {
+        balloonContentLayout: BalloonContentLayout,
+        // Запретим замену обычного балуна на балун-панель.
+        // Если не указывать эту опцию, на картах маленького размера откроется балун-панель.
+        balloonPanelMaxMapArea: 0
+      });
+
+      mapClusterer.add(myPlacemark);
+      //навешиваем обработчик по клику на метку - чтобы загрузить отзывы
+      myPlacemark.events.add('click', function() {
+        setTimeout(function() {
+          var reviewList = document.getElementById('rl');
+
+          //отправимся на сервер за запросом отзывов по этому адресу
+
+          var xhr = new XMLHttpRequest();
+          var adrRequest = JSON.stringify({
+            op: "get",
+            address: firstGeoObject.getAddressLine()
+          });
+          xhr.open('POST', "http://localhost:3000");
+          xhr.responseType = 'json';
+          xhr.send(adrRequest);
+          xhr.onloadend = function() {
+            for (var i = 0; i < xhr.response.length; i++) {
+              //console.log(xhr.response[i])
+              var li = generateReviewMarkup(xhr.response[i]);
+              reviewList.innerHTML += li;
+            }
+          };
+        }, 100);
+      });
+      //Добавляем отзыв 
+      document.addEventListener('click', function(e) {
+        if (e.target.id == 'sendReview') {
+          e.preventDefault();
+          // Запишем данные формы в переменные
+          var name = newReview.name.value,
+            place = newReview.place.value,
+            text = newReview.text.value,
+            date = new Date();
+          date = date.toLocaleString();
+          //Проверим заполнена ли форма отзыва.
+          if (name.length === 0 || place.length === 0 || text.length === 0) {
+            alert('Вы не написали отзыв!');
+          } else {
+            //Если заполнена, отправляем на сервер XHR
+            var xhr = new XMLHttpRequest();
+
+            var addRequest = {
+              "op": "add",
+              "review": {
+                "coords": {
+                  "x": coords[0],
+                  "y": coords[1]
+                },
+                "address": firstGeoObject.getAddressLine(),
+                "name": name,
+                "place": place,
+                "text": text,
+                "date": Date.now()
+              }
+            };
+            addRequest = JSON.stringify(addRequest);
+            xhr.open('POST', 'http://localhost:3000');
+            xhr.send(addRequest);
+          }
+        }
+      });
+
+    });
+  });
 }

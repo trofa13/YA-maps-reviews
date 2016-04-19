@@ -1,0 +1,23 @@
+{
+  "name": "ya-maps-revies",
+  "version": "0.0.1",
+  "description": "some description",
+  "main": "main.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trofa13/YA-maps-reviews.git"
+  },
+  "author": "Trofim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trofa13/YA-maps-reviews/issues"
+  },
+  "homepage": "https://github.com/trofa13/YA-maps-reviews#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
