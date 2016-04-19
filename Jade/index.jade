@@ -16,60 +16,60 @@ html
 
 	body
 		div(id="map")
-			.mr-wrapper#popup
-				header.review-header
-					span(class ="header-adress")
-						| Выберите друзей
-					.x-wrapper
-						a(href="#" id="closeBaloon")
-							img(src="img/x.png", alt="review-close")
-				.review-list-wrapper
-					ul.review-list#rl
-						script(id="review-list", type="text/x-handlebars-template").
-							{{#each this}}
-							<li class = "review-list-item">
-								<strong class="reviewer-name">
-								{{name}}
-								</strong>
-								<span class="review-place">
-								{{place}}
-								</span>
-								<span class="review-date">
-								{{date}}
-								</span>
-								<span class="review-text">
-								{{text}}
-								</span>
-							</li>
-							{{/each}}
-						li.review-list-item
-							strong.reviewer-name
-								|svetlana 
-							span.review-place
-								|Шоколадница 
-							span.review-date
-								|13.12.2015
-							span.review-text
-								|Очень хорошее место!
-						li.review-list-item
-							strong.reviewer-name
-								|svetlana 
-							span.review-place
-								|Шоколадница 
-							span.review-date
-								|13.12.2015
-							span.review-text
-								|Очень хорошее место!
-					hr
-				.review-form-wrapper
-					form(class="review-add__form" name="newReview")
-						span.form-header
-							|Ваш отзыв
-						input(class = "review-add__input" type="text" name = "name" placeholder="Ваше имя")
-						input(class = "review-add__input" type="text" name = "place" placeholder="Укажите место")
-						textarea(class = "review-add__textarea" type="text" name = "text" placeholder="Поделитесь впечатлениями")
-						a(class = "review-add__button" id="sendReview" href="#")
-							|Добавить
+			//- .mr-wrapper#popup
+			//- 	header.review-header
+			//- 		span(class ="header-adress")
+			//- 			| Выберите друзей
+			//- 		.x-wrapper
+			//- 			a(href="#" id="closeBaloon")
+			//- 				img(src="img/x.png", alt="review-close")
+			//- 	.review-list-wrapper
+			//- 		ul.review-list#rl
+			//- 			script(id="review-list", type="text/x-handlebars-template").
+			//- 				{{#each this}}
+			//- 				<li class = "review-list-item">
+			//- 					<strong class="reviewer-name">
+			//- 					{{name}}
+			//- 					</strong>
+			//- 					<span class="review-place">
+			//- 					{{place}}
+			//- 					</span>
+			//- 					<span class="review-date">
+			//- 					{{date}}
+			//- 					</span>
+			//- 					<span class="review-text">
+			//- 					{{text}}
+			//- 					</span>
+			//- 				</li>
+			//- 				{{/each}}
+			//- 			li.review-list-item
+			//- 				strong.reviewer-name
+			//- 					|svetlana 
+			//- 				span.review-place
+			//- 					|Шоколадница 
+			//- 				span.review-date
+			//- 					|13.12.2015
+			//- 				span.review-text
+			//- 					|Очень хорошее место!
+			//- 			li.review-list-item
+			//- 				strong.reviewer-name
+			//- 					|svetlana 
+			//- 				span.review-place
+			//- 					|Шоколадница 
+			//- 				span.review-date
+			//- 					|13.12.2015
+			//- 				span.review-text
+			//- 					|Очень хорошее место!
+			//- 		hr
+			//- 	.review-form-wrapper
+			//- 		form(class="review-add__form" name="newReview")
+			//- 			span.form-header
+			//- 				|Ваш отзыв
+			//- 			input(class = "review-add__input" type="text" name = "name" placeholder="Ваше имя")
+			//- 			input(class = "review-add__input" type="text" name = "place" placeholder="Укажите место")
+			//- 			textarea(class = "review-add__textarea" type="text" name = "text" placeholder="Поделитесь впечатлениями")
+			//- 			a(class = "review-add__button" id="sendReview" href="#")
+			//- 				|Добавить
 
 		script(src="main.min.js")
 

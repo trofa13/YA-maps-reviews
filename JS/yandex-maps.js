@@ -1,5 +1,28 @@
 ymaps.ready(init);
 
+var myBaloonContent =         "<div class=\"mr-wrapper\">" +
+          "<header class=\"review-header\"><span class=\"header-adress\">Выберите друзей</span>" +
+            "<div class=\"x-wrapper\"><a href=\"#\"><img src=\"img/x.png\" alt=\"review-close\"></a></div>" +
+          "</header>" +
+          "<div class=\"review-list-wrapper\">" +
+            "<ul id=\"rl\" class=\"review-list\">" +
+            "<script id=\"review-list\" type=\"text/x-handlebars-template\">" +
+              "<li class = \"review-list-item\">" +
+                "<strong class=\"reviewer-name\">" +
+               //   "{{name}}" +
+                "</strong>" +
+                "<span class=\"review-place\">" +
+                //  "{{place}}" +
+                "</span>" +
+                "<span class=\"review-date\">" +
+                 // "{{date}}" +
+                "</span>" +
+                "<span class=\"review-text\">" +
+                  //"{{text}}" +
+                "</span></li>" +
+              "</script>" +
+        "</ul><hr></div>";
+
 function init() {
     var myPlacemark,
         myMap = new ymaps.Map('map', {
@@ -20,7 +43,7 @@ function init() {
             "<script id=\"review-list\" type=\"text/x-handlebars-template\">" +
               "<li class = \"review-list-item\">" +
                 "<strong class=\"reviewer-name\">" +
-               //   "{{name}}" +
+                "{{properties.name}}" +
                 "</strong>" +
                 "<span class=\"review-place\">" +
                 //  "{{place}}" +
