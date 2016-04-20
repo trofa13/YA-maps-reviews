@@ -135,7 +135,7 @@ $review-width: 380px;
 	background-color: $white;
 	border-radius: 0 0 10px 10px;
 	padding-left: 20px;
-
+	margin-bottom: 20px;
 }
 
 .review-add__form{
@@ -167,7 +167,7 @@ $review-width: 380px;
 }
 .review-add__textarea{
 	@extend .review-add__input;
-	resize:vertical;
+	resize:none;
 	line-height: 1.6;
 
 }

@@ -533,6 +533,7 @@ body {
   background-color: #fff;
   border-radius: 0 0 10px 10px;
   padding-left: 20px;
+  margin-bottom: 20px;
 }
 
 .review-add__form {
@@ -565,7 +566,7 @@ body {
 }
 
 .review-add__textarea {
-  resize: vertical;
+  resize: none;
   line-height: 1.6;
 }
 
