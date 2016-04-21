@@ -84,7 +84,7 @@ function init() {
   var allRequest = JSON.stringify({
     op: "all"
   });
-  xhr.open('POST', 'http://localhost:3000');
+  xhr.open('POST', 'http://smelukov.com:3000/');
   xhr.responseType = 'json';
   xhr.send(allRequest);
   xhr.onloadend = function() {
@@ -123,7 +123,7 @@ function init() {
                 op: "get",
                 address: firstGeoObject.getAddressLine()
               });
-              xhr.open('POST', "http://localhost:3000");
+              xhr.open('POST', "http://smelukov.com:3000/");
               xhr.responseType = 'json';
               xhr.send(adrRequest);
               xhr.onloadend = function() {
@@ -178,7 +178,7 @@ function init() {
             op: "get",
             address: firstGeoObject.getAddressLine()
           });
-          xhr.open('POST', "http://localhost:3000");
+          xhr.open('POST', "http://smelukov.com:3000/");
           xhr.responseType = 'json';
           xhr.send(adrRequest);
           xhr.onloadend = function() {
@@ -222,7 +222,7 @@ function init() {
               }
             };
             addRequest = JSON.stringify(addRequest);
-            xhr.open('POST', 'http://localhost:3000');
+            xhr.open('POST', 'http://smelukov.com:3000/');
             xhr.send(addRequest);
             var reviewList = document.getElementById('rl');
             var li = generateReviewMarkup(JSON.parse(addRequest).review);
