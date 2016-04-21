@@ -131,6 +131,7 @@ $review-width: 380px;
 
 /*-------------- добавление отзыва ---------------*/
 .review-form-wrapper{
+	min-height: 250px;
 	color: $text-color;
 	background-color: $white;
 	border-radius: 0 0 10px 10px;

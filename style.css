@@ -529,6 +529,7 @@ body {
 
 /*-------------- добавление отзыва ---------------*/
 .review-form-wrapper {
+  min-height: 250px;
   color: #5c5c5c;
   background-color: #fff;
   border-radius: 0 0 10px 10px;
